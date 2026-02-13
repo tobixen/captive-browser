@@ -1,4 +1,8 @@
-The upstream project has not been maintained for several years.  This fork adds the fixes I needed for getting this to work on my laptop, but I also asked Claude the AI to look through all open pull requests and "low-hanging fruit" issues and incorporate/fix everything that was relevant and/or "low-hanging fruit".  Disclaimer: This fork was completely "vibe-programmed", Claude has done the job here, I haven't even bothered looking into the changes.  I take responsibility for testing this on Archlinux, Wayland and Sway as well as incorporating future pull requests, but not much more than that.  Apparently I did manage to wake up the original maintainer, see also https://github.com/FiloSottile/captive-browser/issues/39 :-)
+The upstream project has not been maintained for several years.  This fork adds the fixes I needed for getting this to work on my laptop, but I also asked Claude the AI to look through all open pull requests and "low-hanging fruit" issues and incorporate/fix everything that was relevant and/or "low-hanging fruit".
+
+I did fail to see that there already exists an active fork of the project at https://github.com/pacoorozco/captive-browser - possibly this fork is moot and development should rather go on in the pacoorozco fork.  I've pulled some of the changes from there into this project.
+
+Disclaimer: This fork was completely "vibe-programmed", Claude has done the job here, I haven't even bothered looking into the changes.  I take responsibility for testing this on Archlinux, Wayland and Sway as well as incorporating future pull requests, but not much more than that.  Apparently I did manage to wake up the original maintainer, see also https://github.com/FiloSottile/captive-browser/issues/39 :-)
 
 ---
 
@@ -20,7 +24,7 @@ You'll need Go 1.18 or newer, and a supported browser (Chrome, Chromium, or Fire
 go install github.com/tobixen/captive-browser@latest
 ```
 
-Then install a config file in `$XDG_CONFIG_HOME/captive-browser.toml` (if set) or `~/.config/captive-browser.toml`. Choose one of the stock configs below based on your setup. You may need to adjust the network interface name (e.g., `wlan0`, `wlp3s0`).
+Then install a config file in `$XDG_CONFIG_HOME/captive-browser.toml` (if set) or `~/.config/captive-browser.toml`. Example configs are in the `config_examples/` directory. You may need to adjust the network interface name (e.g., `wlan0`, `wlp3s0`).
 
 ### Choosing a config
 
@@ -41,7 +45,7 @@ Note: on some distros, the Chrome/Chromium binary is named `google-chrome`, `goo
 For Wayland compositors (Sway, Hyprland, etc.) with NetworkManager:
 
 ```
-cp captive-browser-networkmanager-chromium-wayland.toml ~/.config/captive-browser.toml
+cp config_examples/captive-browser-linux-networkmanager-wayland.toml ~/.config/captive-browser.toml
 ```
 
 The `--ozone-platform=wayland` flag is required for Wayland. Without it, Chromium will fail with "Missing X server or $DISPLAY".
@@ -51,34 +55,34 @@ The `--ozone-platform=wayland` flag is required for Wayland. Without it, Chromiu
 For Firefox users with NetworkManager (works on both X11 and Wayland):
 
 ```
-cp captive-browser-firefox.toml ~/.config/captive-browser.toml
+cp config_examples/captive-browser-linux-firefox.toml ~/.config/captive-browser.toml
 ```
 
 This config creates a dedicated Firefox profile with extensive privacy hardening (~80 preferences) that prevents all unnecessary network requests.
 
-### Ubuntu / Chrome
+### Linux / NetworkManager / Chrome (Ubuntu etc.)
 
 ```
-cp captive-browser-ubuntu-chrome.toml ~/.config/captive-browser.toml
+cp config_examples/captive-browser-linux-networkmanager.toml ~/.config/captive-browser.toml
 ```
 
-### Arch / systemd-networkd / Chrome
+### Linux / systemd-networkd / Chrome
 
 ```
 go install github.com/tobixen/captive-browser/cmd/systemd-networkd-dns@latest
-cp captive-browser-arch-chrome.toml ~/.config/captive-browser.toml
+cp config_examples/captive-browser-linux-systemd-networkd.toml ~/.config/captive-browser.toml
 ```
 
-### Arch / dhcpcd / Chromium
+### Linux / dhcpcd / Chromium
 
 ```
-cp captive-browser-dhcpcd-chromium.toml ~/.config/captive-browser.toml
+cp config_examples/captive-browser-linux-dhcpcd.toml ~/.config/captive-browser.toml
 ```
 
 ### macOS / Chrome
 
 ```
-cp captive-browser-mac-chrome.toml ~/.config/captive-browser.toml
+cp config_examples/captive-browser-mac.toml ~/.config/captive-browser.toml
 ```
 
 To disable the insecure system captive browser [see here](https://github.com/drduh/macOS-Security-and-Privacy-Guide#captive-portal). If that doesn't work, disable SIP (remember to re-enable it), and rename `/System/Library/CoreServices/Captive Network Assistant.app`.
@@ -93,7 +97,7 @@ To configure the Chromium-based browser, open a non-Incognito window (Ctrl-N / C
 
 ### "Missing X server or $DISPLAY" on Wayland
 
-Use the Wayland config (`captive-browser-networkmanager-chromium-wayland.toml`) which includes `--ozone-platform=wayland`.
+Use the Wayland config (`config_examples/captive-browser-linux-networkmanager-wayland.toml`) which includes `--ozone-platform=wayland`.
 
 ### DNS resolution timeouts (e.g., at specific hotspots)
 
