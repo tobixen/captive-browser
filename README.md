@@ -1,4 +1,6 @@
-The original project has not been maintained for several years.  This fork adds the fixes I needed for getting this to work on my laptop, but I also asked Claude the AI to look through all open pull requests and "low-hanging fruit" issues and incorporate/fix everything that was relevant and/or "low-hanging fruit".  Disclaimer: This fork was completely "vibe-programmed", Claude has done the job here, I haven't even bothered looking into the changes.  I take responsibility for testing this on Archlinux, Wayland and Sway, but not much more than that.
+The upstream project has not been maintained for several years.  This fork adds the fixes I needed for getting this to work on my laptop, but I also asked Claude the AI to look through all open pull requests and "low-hanging fruit" issues and incorporate/fix everything that was relevant and/or "low-hanging fruit".  Disclaimer: This fork was completely "vibe-programmed", Claude has done the job here, I haven't even bothered looking into the changes.  I take responsibility for testing this on Archlinux, Wayland and Sway as well as incorporating future pull requests, but not much more than that.  Apparently I did manage to wake up the original maintainer, see also https://github.com/FiloSottile/captive-browser/issues/39 :-)
+
+---
 
 # captive-browser
 
