@@ -63,7 +63,10 @@ func getDHCPDNSForInterfaceFromDBus(iface string) (string, error) {
 	var callFlags dbus.Flags
 
 	netO := conn.Object("org.freedesktop.resolve1", "/org/freedesktop/resolve1")
-	netO.Call("org.freedesktop.resolve1.Manager.GetLink", callFlags, i.Index).Store(&linkPath)
+	err = netO.Call("org.freedesktop.resolve1.Manager.GetLink", callFlags, i.Index).Store(&linkPath)
+	if err != nil {
+		return "", fmt.Errorf("error fetching DNS property from DBus: %v", err)
+	}
 
 	linkO := conn.Object("org.freedesktop.resolve1", linkPath)
 	variant, err := linkO.GetProperty("org.freedesktop.resolve1.Link.DNS")
@@ -71,8 +74,7 @@ func getDHCPDNSForInterfaceFromDBus(iface string) (string, error) {
 		return "", fmt.Errorf("error fetching DNS property from DBus: %v", err)
 	}
 
-	var variantVal [][]interface{}
-	variantVal = variant.Value().([][]interface{})
+	variantVal := variant.Value().([][]interface{})
 
 	// Check the IP version of the nameserver address that was returned
 	//  2 == AF_INET,  26 == AF_INET6
