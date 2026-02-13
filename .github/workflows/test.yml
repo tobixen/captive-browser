@@ -1,0 +1,29 @@
+name: Test and build
+on:
+  push:
+    branches:
+      - 'main'
+    paths-ignore:
+      - '*.md'
+      - 'config_examples/**'
+  pull_request:
+    paths-ignore:
+      - '*.md'
+      - 'config_examples/**'
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        go-version: ['stable']
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+      - name: Build
+        run: make build
+      - name: Test
+        run: make test
