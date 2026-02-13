@@ -43,6 +43,16 @@ cp $(go env GOPATH)/src/github.com/FiloSottile/captive-browser/captive-browser-a
 cp $(go env GOPATH)/src/github.com/FiloSottile/captive-browser/captive-browser-dhcpcd-chromium.toml ~/.config/captive-browser.toml
 ```
 
+### NetworkManager / Chromium / Wayland
+
+For Wayland compositors (Sway, Hyprland, etc.) with NetworkManager:
+
+```
+cp $(go env GOPATH)/src/github.com/FiloSottile/captive-browser/captive-browser-networkmanager-chromium-wayland.toml ~/.config/captive-browser.toml
+```
+
+Note: you may need to replace `wlan0` with your wireless interface name.
+
 ## Usage
 
 Simply run `captive-browser`, log into the captive portal, and then *quit* (⌘Q / Ctrl-Q) the Chrome instance.

@@ -1,0 +1,41 @@
+# browser is the shell (/bin/sh) command executed once the proxy starts.
+# When browser exits, the proxy exits. An extra env var PROXY is available.
+#
+# Here, we use a separate Chromium instance in Incognito mode, so that
+# it can run (and be waited for) alongside the default one, and that
+# it maintains no state across runs. To configure this browser open a
+# normal window in it, settings will be preserved.
+#
+# --ozone-platform=wayland is required for Wayland compositors (Sway,
+# Hyprland, etc.) since Chromium defaults to X11 and will fail with
+# "Missing X server or $DISPLAY" without it.
+#
+# --disable-features=HttpsUpgrades prevents Chromium from upgrading
+# HTTP to HTTPS, which would break captive portal login pages.
+browser = """
+    chromium \
+    --ozone-platform=wayland \
+    --user-data-dir="$HOME/.chromium-captive" \
+    --proxy-server="socks5://$PROXY" \
+    --proxy-bypass-list="<-loopback>" \
+    --no-first-run \
+    --new-window \
+    --incognito \
+    --disable-features=HttpsUpgrades \
+    --disable-extensions \
+    --disable-sync \
+    --disable-background-networking \
+    --disable-component-update \
+    http://example.com
+"""
+
+# dhcp-dns is the shell (/bin/sh) command executed to obtain the DHCP
+# DNS server address. The first match of an IPv4 regex is used.
+# IPv4 only, because let's be real, it's a captive portal.
+#
+# Uses nmcli to get the DNS server provided by DHCP via NetworkManager.
+# Replace wlan0 with your wireless interface name if different.
+dhcp-dns = "nmcli -t -f IP4.DNS device show wlan0 | head -1 | cut -d: -f2"
+
+# socks5-addr is the listen address for the SOCKS5 proxy server.
+socks5-addr = "localhost:1666"
