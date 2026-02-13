@@ -58,6 +58,10 @@ type Config struct {
 }
 
 func main() {
+	if Version == "" {
+		Version = DefaultVersion
+	}
+	log.Printf("Running captive-browser version %s...", Version)
 	configPath := os.Getenv("XDG_CONFIG_HOME")
 	if configPath == "" {
 		usr, _ := user.Current()
