@@ -1,2 +1,4 @@
-* I don't know much about Go, but in my opinion this project ought to have a Makefile and a CHANGELOG.md
-* There are still some issues reported in the upstream project that hasn't been addressed.
+* Upstream issue #30: Support DHCP option 114 (venue-info-url) for captive portal URL detection (RFC 8910). Requires Go code changes.
+* Upstream issue #27: KDE NetworkManager integration (wishlist).
+* Consider adding a golangci-lint config file for consistent linting rules.
+* Test Firefox config more thoroughly across different captive portals.
