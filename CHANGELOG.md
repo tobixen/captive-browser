@@ -5,6 +5,11 @@ Changes in this fork (tobixen/captive-browser) relative to the upstream
 
 ## Unreleased
 
+Note: the git history has been force-pushed to correct author attributions
+on commits ported from other contributors' forks and PRs. Git `Author`
+fields now reflect the original contributor where the work was substantially
+theirs, with `Co-Authored-By` trailers for additional contributors.
+
 ### Build system
 - Migrated from deprecated Gopkg to Go modules — builds with Go >= 1.18
   (upstream [#23](https://github.com/FiloSottile/captive-browser/issues/23)
