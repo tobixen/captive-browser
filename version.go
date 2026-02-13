@@ -7,7 +7,7 @@ var (
 	// releasing; a git-annotated tag sets this version.
 	Version = "" // git tag, output of $(git describe --tags --always --dirty)
 
-	// DefaultVersion is used as a fallback when version information from
-	// git is not provided via go ldflags.
-	DefaultVersion = "0.0.0-git"
+	// DefaultVersion is used as a fallback when version information from git
+	// is not provided via go ldflags (e.g., when building with go install).
+	DefaultVersion = "0.0.0-dev"
 )
