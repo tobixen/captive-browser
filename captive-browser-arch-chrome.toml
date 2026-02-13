@@ -9,8 +9,9 @@ browser = """
     google-chrome \
     --user-data-dir="$HOME/.google-chrome-captive" \
     --proxy-server="socks5://$PROXY" \
-    --host-resolver-rules="MAP * ~NOTFOUND , EXCLUDE localhost" \
+    --proxy-bypass-list="<-loopback>" \
     --no-first-run --new-window --incognito \
+    --disable-features=HttpsUpgrades \
     http://example.com
 """
 
@@ -22,7 +23,7 @@ browser = """
 #
 # To install the systemd-networkd-dns command, run:
 #
-#  $ go get github.com/FiloSottile/captive-browser/cmd/systemd-networkd-dns
+#  $ go install github.com/FiloSottile/captive-browser/cmd/systemd-networkd-dns@latest
 #
 dhcp-dns = "$(go env GOPATH)/bin/systemd-networkd-dns wlp3s0"
 

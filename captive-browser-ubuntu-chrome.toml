@@ -9,8 +9,9 @@ browser = """
     google-chrome \
     --user-data-dir="$HOME/.google-chrome-captive" \
     --proxy-server="socks5://$PROXY" \
-    --host-resolver-rules="MAP * ~NOTFOUND , EXCLUDE localhost" \
+    --proxy-bypass-list="<-loopback>" \
     --no-first-run --new-window --incognito \
+    --disable-features=HttpsUpgrades \
     http://example.com
 """
 
