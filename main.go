@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"io/ioutil"
 	"log"
 	"net"
 	"os"
@@ -65,7 +64,7 @@ func main() {
 		configPath = filepath.Join(usr.HomeDir, ".config")
 	}
 	configPath = filepath.Join(configPath, "captive-browser.toml")
-	tomlData, err := ioutil.ReadFile(configPath)
+	tomlData, err := os.ReadFile(configPath)
 	if err != nil {
 		log.Fatalln("Failed to read config:", err)
 	}
